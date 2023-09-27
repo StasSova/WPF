@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v7.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v7.0": {
+      "CW1_FirstSee/1.0.0": {
+        "runtime": {
+          "CW1_FirstSee.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CW1_FirstSee/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
