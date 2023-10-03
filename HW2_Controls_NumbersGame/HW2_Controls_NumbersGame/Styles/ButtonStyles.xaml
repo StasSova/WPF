@@ -1,0 +1,265 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--Основной стиль MenuItem-->
+    <Style x:Key="MenuItemStyle" TargetType="MenuItem">
+        <!--Настройка стандартного елемента управления-->
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="10"/>
+        <!--Создаем свой шаблон для елемента управления-->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuItem">
+                    <!--Граница Menu Item-->
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="4"
+                        Background="{TemplateBinding Background}">
+                        <!--Контент MenuItem -->
+                        <StackPanel Orientation="Horizontal">
+                            <!--Отображаемый контент на кнопке берем из свойства Header-->
+                            <ContentPresenter ContentSource="Header"
+                                          RecognizesAccessKey="True"
+                                          Margin="6,3,6,3"/>
+                            <!--RecognizesAccessKey - Реагрированния на клавиши доступа
+                            Для использования необходимо нажать ALT + "подчеркнутую букву"-->
+                            
+                            <!--Всплывабщее окно
+                            Открывает содержимое данного MenuItem если оно есть-->
+                            <Popup x:Name="PART_Popup"
+                                   Placement="Bottom"
+                                   AllowsTransparency="True"
+                                   Focusable="False"
+                                   IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                                   PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}">
+                                <!--Отображаемая граница SubItem-ов-->
+                                <Border x:Name="SubMenuBorder"
+                                        BorderThickness="1"
+                                        Background="Transparent"
+                                        CornerRadius="0,5,5,0">
+                                    <Border.BorderBrush>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                            <GradientStop Color="DarkBlue" Offset="0"/>
+                                            <GradientStop Color="Blue" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Border.BorderBrush>
+                                    <!--Отображения контента-->
+                                    <ItemsPresenter />
+                                </Border>
+                            </Popup>
+                        </StackPanel>
+                    </Border>
+                    
+                    <!--Срабатываемые триггеры-->
+                    <ControlTemplate.Triggers>
+                        <!--Наведения мышью-->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <!--Меняем состояния заднего фона-->
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                        <GradientStop Color="DarkBlue" Offset="0"/>
+                                        <GradientStop Color="Blue" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Стиль для SubItem елементов-->
+    <Style x:Key="MenuSubItemStyle" TargetType="MenuItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="10"/>
+        <!--Создаем свой шаблон для елемента управления-->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuItem">
+                    <!--Граница-->
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="4"
+                            Background="{TemplateBinding Background}">
+                        
+                        <!--Контейнер-->
+                        <StackPanel Orientation="Horizontal">
+                            <ContentPresenter ContentSource="Header"
+                                              RecognizesAccessKey="True"
+                                              Margin="6,3,6,3"/>
+                            
+                            <!-- Стандартный Popup с ItemsPresenter -->
+                            <Popup x:Name="PART_Popup"
+                                   Placement="Right"
+                                   AllowsTransparency="True"
+                                   Focusable="False"
+                                   IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                                   PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}">
+                                <Border x:Name="SubMenuBorder"
+                                        BorderThickness="1"
+                                        Background="Transparent"
+                                        CornerRadius="0,5,5,0">
+                                    <Border.BorderBrush>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                            <GradientStop Color="DarkBlue" Offset="0"/>
+                                            <GradientStop Color="Blue" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Border.BorderBrush>
+                                    <ItemsPresenter />
+                                </Border>
+                            </Popup>
+                        </StackPanel>
+                    </Border>
+                    
+                    <!--Тригеры-->
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                        <GradientStop Color="DarkBlue" Offset="0"/>
+                                        <GradientStop Color="Blue" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!--Стиль для кнопки Restart-->
+    <Style x:Key="ButtonRestartGame" TargetType="Button">
+        <Setter Property="Foreground" Value="WhiteSmoke"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Opacity" Value="0.7"/>
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" >
+                    <GradientStop Color="DarkBlue" Offset="0"/>
+                    <GradientStop Color="DarkRed" Offset="0.5"/>
+                    <GradientStop Color="Blue" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Margin" Value="0,0,0,5"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+
+                    <Border BorderThickness="4,2,4,2"  CornerRadius="10"
+                            Margin="25,10,10,10"
+                            Background="{TemplateBinding Background}">
+                        <Border.BorderBrush>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" >
+                                <GradientStop Color="Aqua" Offset="0"/>
+                                <GradientStop Color="DarkCyan" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.BorderBrush>
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--ENABLE Стиль для кнопок с числами-->
+    <Style x:Key="ButtonForNumber" TargetType="Button">
+        <Setter Property="Foreground" Value="WhiteSmoke"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Opacity" Value="0.7"/>
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" >
+                    <GradientStop Color="DarkBlue" Offset="0"/>
+                    <GradientStop Color="LightBlue" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+
+                    <Border BorderThickness="4,2,4,2"  CornerRadius="10"
+                        Background="{TemplateBinding Background}">
+                        <Border.BorderBrush>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" >
+                                <GradientStop Color="Aqua" Offset="0"/>
+                                <GradientStop Color="DarkCyan" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.BorderBrush>
+                        
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                    
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--DISABLE Стиль для кнопок с числами-->
+    <Style x:Key="ButtonForNumberDisable" TargetType="Button">
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Opacity" Value="0.7"/>
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" >
+                    <GradientStop Color="DarkGray" Offset="0"/>
+                    <GradientStop Color="Gray" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+
+                    <Border BorderThickness="4,2,4,2"  CornerRadius="10"
+                    Background="{TemplateBinding Background}">
+                        <Border.BorderBrush>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" >
+                                <GradientStop Color="Gray" Offset="0"/>
+                                <GradientStop Color="DarkGray" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.BorderBrush>
+
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>
