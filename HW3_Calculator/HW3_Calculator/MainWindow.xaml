@@ -1,0 +1,136 @@
+﻿<Window x:Class="HW3_Calculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HW3_Calculator"
+        mc:Ignorable="d"
+        Title="Calculator" Height="507" Width="332"
+        MinWidth="332" MinHeight="507"
+        Background="{StaticResource wind_backgroundColor}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!--TextBox-->
+        <StackPanel Grid.Row="0"
+                    Orientation="Vertical"
+                    Margin="20,20,20,15">
+            <TextBox Name="txt_Prev"
+                     Style="{StaticResource txt_Box_Prev}" />
+            <TextBox Name="txt_Curr"
+                     Style="{StaticResource txt_Box_Cur}" />
+        </StackPanel>
+        <!--Buttons-->
+        <Grid Grid.Row="1">
+            <!-- 4 Columns-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions> 
+            <!-- 6 Rows-->
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <!--Numbers-->
+            <Button Grid.Column="1" Grid.Row="5" 
+                    Content="0" Style="{StaticResource st_Btn_Number}"
+                    Click="ButtonDigit_Click"/>
+            
+            <Button Grid.Column="0" Grid.Row="4" 
+                    Content="1" Style="{StaticResource st_Btn_Number}"
+                    Click="ButtonDigit_Click"/>
+            <Button Grid.Column="1" Grid.Row="4" 
+                    Content="2" Style="{StaticResource st_Btn_Number}"
+                    Click="ButtonDigit_Click"/>
+            <Button Grid.Column="2" Grid.Row="4" 
+                    Content="3" Style="{StaticResource st_Btn_Number}"
+                    Click="ButtonDigit_Click"/>
+            
+            <Button Grid.Column="0" Grid.Row="3" 
+                    Content="4" Style="{StaticResource st_Btn_Number}"
+                    Click="ButtonDigit_Click"/>
+            <Button Grid.Column="1" Grid.Row="3" 
+                    Content="5" Style="{StaticResource st_Btn_Number}"
+                    Click="ButtonDigit_Click"/>
+            <Button Grid.Column="2" Grid.Row="3" 
+                    Content="6" Style="{StaticResource st_Btn_Number}"
+                    Click="ButtonDigit_Click"/>
+            
+            <Button Grid.Column="0" Grid.Row="2" 
+                    Content="7" Style="{StaticResource st_Btn_Number}"
+                    Click="ButtonDigit_Click"/>
+            <Button Grid.Column="1" Grid.Row="2" 
+                    Content="8" Style="{StaticResource st_Btn_Number}"
+                    Click="ButtonDigit_Click"/>
+            <Button Grid.Column="2" Grid.Row="2" 
+                    Content="9" Style="{StaticResource st_Btn_Number}"
+                    Click="ButtonDigit_Click"/>
+            
+            <!--Oparation-->
+            <Button Grid.Column="0" Grid.Row="5" 
+                    Name="btn_Point"
+                    Content="," Style="{StaticResource st_Btn_Operat}"
+                    Click="ButtonDecimal_Click"/>
+            <Button Grid.Column="2" Grid.Row="5" Grid.ColumnSpan="2" 
+                    Name="btn_Res"
+                    Content="=" Style="{StaticResource st_Btn_Res}"
+                    Click="ButtonEquals_Click"/>
+            
+            
+            <Button Grid.Column="3" Grid.Row="4"
+                    Name="btn_Plus"
+                    Content="+" Style="{StaticResource st_Btn_Operat}"
+                    Click="ButtonOperation_Click"/>
+            <Button Grid.Column="3" Grid.Row="3"
+                    Name="btn_Minus"
+                    Content="-" Style="{StaticResource st_Btn_Operat}"
+                    Click="ButtonOperation_Click"/>
+            <Button Grid.Column="3" Grid.Row="2"
+                    Name="btn_Mult"
+                    Content="x" Style="{StaticResource st_Btn_Operat}"
+                    Click="ButtonOperation_Click"/>
+            <Button Grid.Column="3" Grid.Row="1"
+                    Name="btn_Div"
+                    Content="÷" Style="{StaticResource st_Btn_Operat}"
+                    Click="ButtonOperation_Click"/>
+            
+            
+            <Button Grid.Column="3" Grid.Row="0"
+                    Name="btn_Back"
+                    Content="&lt;" Style="{StaticResource st_Btn_Operat}"
+                    Click="ButtonBackspace_Click"/>
+            <Button Grid.Column="2" Grid.Row="0"
+                    Name="btn_C"
+                    Content="C" Style="{StaticResource st_Btn_Operat}"
+                    Click="ButtonC_Click"/>
+            <Button Grid.Column="1" Grid.Row="0"
+                    Name="btn_CE"
+                    Content="CE" Style="{StaticResource st_Btn_Operat}"
+                    Click="ButtonCE_Click"/>
+            <Button Grid.Column="0" Grid.Row="0"
+                    Name="btn_Per"
+                    Content="%" Style="{StaticResource st_Btn_Operat}"/>
+            <Button Grid.Column="0" Grid.Row="1"
+                    Name="btn_1X"
+                    Content="1/x" Style="{StaticResource st_Btn_Operat}"/>
+            <Button Grid.Column="1" Grid.Row="1"
+                    Name="btn_X2"
+                    Content="x^2" Style="{StaticResource st_Btn_Operat}"/>
+            <Button Grid.Column="2" Grid.Row="1"
+                    Name="btn_Square"
+                    Content="√" Style="{StaticResource st_Btn_Operat}"/>
+
+        </Grid>
+    </Grid>
+</Window>

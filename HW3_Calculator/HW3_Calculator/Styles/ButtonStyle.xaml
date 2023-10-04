@@ -1,0 +1,124 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    
+    <!--Style for button-->
+    <Style x:Key="st_Btn_Number" TargetType="Button">
+        <!--Настройка стандартного елемента управления-->
+        <Setter Property="Background" Value="{StaticResource btnNumberNormal}"/>
+        <Setter Property="Foreground" Value="{StaticResource txt_Forecolor}"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+                <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontWeight" Value="DemiBold"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Margin" Value="1"/>
+        <!--Creating my template-->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background= "{TemplateBinding Background}"
+                            BorderThickness="2"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            CornerRadius="9">
+                        
+                        <ContentPresenter   HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Content="{TemplateBinding Content}"/>
+                        
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        
+        <!--Triggers-->
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource btnNumberFocused}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{StaticResource btnNumberActive}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--Button style for operation-->
+    <Style x:Key="st_Btn_Operat" TargetType="Button">
+        <!--Настройка стандартного елемента управления-->
+        <Setter Property="Background" Value="{StaticResource btnOperNormal}"/>
+        <Setter Property="Foreground" Value="{StaticResource txt_Forecolor}"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Margin" Value="1"/>
+        <!--Creating my template-->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background= "{TemplateBinding Background}"
+                        BorderThickness="2"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        CornerRadius="9">
+
+                        <ContentPresenter   HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Content="{TemplateBinding Content}"/>
+
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <!--Triggers-->
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource btnOperFocused}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{StaticResource btnOperActive}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--Button style for result-->
+    <Style x:Key="st_Btn_Res" TargetType="Button">
+        <!--Настройка стандартного елемента управления-->
+        <Setter Property="Background" Value="{StaticResource btnResNormal}"/>
+        <Setter Property="Foreground" Value="{StaticResource txt_Forecolor}"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontWeight" Value="DemiBold"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Margin" Value="3"/>
+        <!--Creating my template-->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background= "{TemplateBinding Background}"
+                    BorderThickness="2"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    CornerRadius="13">
+
+                        <ContentPresenter   HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Content="{TemplateBinding Content}"/>
+
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <!--Triggers-->
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource btnResFocused}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{StaticResource btnResActive}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,28 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Button with number -->
+    <SolidColorBrush x:Key="btnNumberNormal" Color="#F9F9F9"/>
+    <SolidColorBrush x:Key="btnNumberFocused" Color="#D9D9D9"/>
+    <SolidColorBrush x:Key="btnNumberActive" Color="#C0C0C0"/>
+
+    <!-- Button with operation -->
+    <SolidColorBrush x:Key="btnOperNormal" Color="#D5D5D5"/>
+    <SolidColorBrush x:Key="btnOperFocused" Color="#B3B3B3"/>
+    <SolidColorBrush x:Key="btnOperActive" Color="#999999"/>
+
+    <!-- Button with '=' -->
+    <SolidColorBrush x:Key="btnResNormal" Color="#155C90"/>
+    <SolidColorBrush x:Key="btnResFocused" Color="#196AA7"/>
+    <SolidColorBrush x:Key="btnResActive" Color="#1A74B6"/>
+
+    <!-- Background color -->
+    <SolidColorBrush x:Key="wind_backgroundColor" Color="#E0E0E0"/>
+    
+    <!-- Forecolor for text on button -->
+    <SolidColorBrush x:Key="txt_Forecolor" Color="Black"/>
+    
+    <!--Forecolor for text on TextBox-->
+    <SolidColorBrush x:Key="txt_PrevColor" Color="#616161"/>
+    <SolidColorBrush x:Key="txt_CurColor" Color="Black"/>
+</ResourceDictionary>
