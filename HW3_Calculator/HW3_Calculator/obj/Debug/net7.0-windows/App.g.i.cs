@@ -59,7 +59,7 @@ namespace HW3_Calculator {
             
             #line default
             #line hidden
-            System.Uri resourceLocater = new System.Uri("/HW3_Calculator;component/app.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/HW3_Calculator;V1.0.0.0;component/app.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\App.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

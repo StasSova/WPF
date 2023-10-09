@@ -1,0 +1,100 @@
+﻿<Window x:Class="HW4_Game_2048.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HW4_Game_2048"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        PreviewKeyDown="Window_PreviewKeyDown"
+        KeyDown="Window_KeyDown">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0">
+            <MenuItem Header="_Game">
+                <MenuItem Header="_New Game"
+                          Click="NewGame_Click"/>
+            </MenuItem>
+        </Menu>
+        <!--Content-->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <TextBlock 
+                    Text="Score"/>
+                <TextBox Name="NumScore"
+                    Text="0"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <TextBlock 
+                    Text="High Score"/>
+                <TextBox Name="NumHighScore"
+                    Text="0"/>
+            </StackPanel>
+        </Grid>
+        
+        <!--Game blocks-->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                       Text="" Name="txt00"/>
+            <TextBlock Grid.Row="0" Grid.Column="1"
+                       Text="" Name="txt01"/>
+            <TextBlock Grid.Row="0" Grid.Column="2"
+                       Text="" Name="txt02"/>
+            <TextBlock Grid.Row="0" Grid.Column="3"
+                       Text="" Name="txt03"/>
+            
+            <TextBlock Grid.Row="1" Grid.Column="0"
+                       Text="" Name="txt10"/>
+            <TextBlock Grid.Row="1" Grid.Column="1"
+                       Text="" Name="txt11"/>
+            <TextBlock Grid.Row="1" Grid.Column="2"
+                       Text="" Name="txt12"/>
+            <TextBlock Grid.Row="1" Grid.Column="3"
+                       Text="" Name="txt13"/>
+            
+            <TextBlock Grid.Row="2" Grid.Column="0"
+                       Text="" Name="txt20"/>
+            <TextBlock Grid.Row="2" Grid.Column="1"
+                       Text="" Name="txt21"/>
+            <TextBlock Grid.Row="2" Grid.Column="2"
+                       Text="" Name="txt22"/>
+            <TextBlock Grid.Row="2" Grid.Column="3"
+                       Text="" Name="txt23"/>
+            
+            <TextBlock Grid.Row="3" Grid.Column="0"
+                       Text="" Name="txt30"/>
+            <TextBlock Grid.Row="3" Grid.Column="1"
+                       Text="" Name="txt31"/>
+            <TextBlock Grid.Row="3" Grid.Column="2"
+                       Text="" Name="txt32"/>
+            <TextBlock Grid.Row="3" Grid.Column="3"
+                       Text="" Name="txt33"/>
+        </Grid>
+        
+        
+    </Grid>
+</Window>
