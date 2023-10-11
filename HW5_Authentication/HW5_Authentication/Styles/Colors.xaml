@@ -1,0 +1,44 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <Color x:Key="Green">#09ae50</Color>
+    <Color x:Key="Red">#f4143f</Color>
+
+    <Color x:Key="ForegroundText">#eeeeee</Color>
+    
+    <Color x:Key="BackgroundText1">#1b9e14</Color>
+    <Color x:Key="BackgroundText2">#bef14b</Color>
+    <Color x:Key="BackgroundText3">#0afb89</Color>
+
+    
+    <Color x:Key="BorderColor1">#1c0438</Color>
+    <Color x:Key="BorderColor2">#f2b603</Color>
+    <Color x:Key="BorderColor3">#29a93e</Color>
+
+    <Color x:Key="ThemeBackground1">#f03a6a</Color>
+    <Color x:Key="ThemeBackground2">#EAA6C3</Color>
+    <Color x:Key="ThemeBackground3">#f5da73</Color>
+
+    <SolidColorBrush x:Key="ForegroundTextBrush" Color="{StaticResource ForegroundText}"/>
+    <SolidColorBrush x:Key="Green_Background" Color="{StaticResource Green}"/>
+    <SolidColorBrush x:Key="Red_Background" Color="{StaticResource Red}"/>
+
+    <LinearGradientBrush x:Key="BorderInput" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="{StaticResource BorderColor1}" Offset="0"/>
+        <GradientStop Color="{StaticResource BorderColor2}" Offset="0.5"/>
+        <GradientStop Color="{StaticResource BorderColor3}" Offset="1"/>
+    </LinearGradientBrush>
+    
+    <LinearGradientBrush x:Key="InputGradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="{StaticResource BackgroundText1}" Offset="0"/>
+        <GradientStop Color="{StaticResource  BackgroundText2}" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="ThemeGradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="{StaticResource ThemeBackground1}" Offset="0"/>
+        <GradientStop Color="{StaticResource ThemeBackground2}" Offset="0.5"/>
+        <GradientStop Color="{StaticResource ThemeBackground3}" Offset="1"/>
+    </LinearGradientBrush>
+    
+    
+</ResourceDictionary>

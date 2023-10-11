@@ -18,3 +18,6 @@ D:\Visual_Studio\3 Course\WPF\HW4_Game_2048\HW4_Game_2048\obj\Debug\net7.0-windo
 D:\Visual_Studio\3 Course\WPF\HW4_Game_2048\HW4_Game_2048\obj\Debug\net7.0-windows\HW4_Game_2048.pdb
 D:\Visual_Studio\3 Course\WPF\HW4_Game_2048\HW4_Game_2048\obj\Debug\net7.0-windows\HW4_Game_2048.genruntimeconfig.cache
 D:\Visual_Studio\3 Course\WPF\HW4_Game_2048\HW4_Game_2048\obj\Debug\net7.0-windows\ref\HW4_Game_2048.dll
+D:\Visual_Studio\3 Course\WPF\HW4_Game_2048\HW4_Game_2048\obj\Debug\net7.0-windows\Styles\Colors.baml
+D:\Visual_Studio\3 Course\WPF\HW4_Game_2048\HW4_Game_2048\obj\Debug\net7.0-windows\Styles\Style.baml
+D:\Visual_Studio\3 Course\WPF\HW4_Game_2048\HW4_Game_2048\obj\Debug\net7.0-windows\App.baml

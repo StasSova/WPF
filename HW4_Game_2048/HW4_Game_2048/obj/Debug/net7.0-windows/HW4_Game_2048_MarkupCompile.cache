@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET7_0;NETCOREAPP
 D:\Visual_Studio\3 Course\WPF\HW4_Game_2048\HW4_Game_2048\App.xaml
-11407045341
+3-1662558203
 
 4-796868094
 198947991364
-MainWindow.xaml;
+MainWindow.xaml;Styles\Colors.xaml;Styles\Style.xaml;
 
 False
 

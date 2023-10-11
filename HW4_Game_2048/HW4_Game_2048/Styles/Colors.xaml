@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+
+    <SolidColorBrush x:Key="UnChangeText">#eee2d6</SolidColorBrush>
+    <SolidColorBrush x:Key="ChangeText">#eeeeee</SolidColorBrush>
+    <SolidColorBrush x:Key="GameText">#000000</SolidColorBrush>
+    
+    <SolidColorBrush x:Key="BackgroundBoard">#c4c3b9</SolidColorBrush>
+    <SolidColorBrush x:Key="BackgroundWindow">#f8f6e9</SolidColorBrush>
+
+    <SolidColorBrush x:Key="c1">#cdc1b4</SolidColorBrush>
+    <SolidColorBrush x:Key="c2">#eee4da</SolidColorBrush>
+    <SolidColorBrush x:Key="c4">#ede0c8</SolidColorBrush>
+    <SolidColorBrush x:Key="c8">#f2b179</SolidColorBrush>
+    <SolidColorBrush x:Key="c16">#f59563</SolidColorBrush>
+    <SolidColorBrush x:Key="c32">#f67c5f</SolidColorBrush>
+    <SolidColorBrush x:Key="c64">#f65e3b</SolidColorBrush>
+    <SolidColorBrush x:Key="c128">#FFDAA520</SolidColorBrush>
+    <SolidColorBrush x:Key="c256">#FF8B4513</SolidColorBrush>
+    <SolidColorBrush x:Key="c512">#FF228B22</SolidColorBrush>
+    <SolidColorBrush x:Key="c1024">#FF9932CC</SolidColorBrush>
+    <SolidColorBrush x:Key="c2048">#FFFFD700</SolidColorBrush>
+
+</ResourceDictionary>

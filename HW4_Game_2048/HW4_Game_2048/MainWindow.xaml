@@ -5,10 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HW4_Game_2048"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" 
+        MinHeight="500" Height="500"
+        MinWidth="500" Width="500"
         PreviewKeyDown="Window_PreviewKeyDown"
-        KeyDown="Window_KeyDown">
-    
+        KeyDown="Window_KeyDown"
+        
+        Background="{StaticResource BackgroundWindow}">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -22,29 +26,39 @@
                           Click="NewGame_Click"/>
             </MenuItem>
         </Menu>
-        <!--Content-->
+        <!--INFO-->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            <!--SCORE-->
+            <Border Grid.Column="0" Style="{StaticResource BorderInfo}">
+                <StackPanel Style="{StaticResource StackPanel}">
+                    <TextBlock  Style="{StaticResource UnchangedText}"
+                        Text="Score"/>
+                    <TextBlock Name="NumScore" 
+                               Style="{StaticResource ChangedText}"
+                               Text="0"/>
+                </StackPanel>
+            </Border>
 
-            <StackPanel Grid.Column="0">
-                <TextBlock 
-                    Text="Score"/>
-                <TextBox Name="NumScore"
-                    Text="0"/>
-            </StackPanel>
-            <StackPanel Grid.Column="1">
-                <TextBlock 
+            <!--HIGH SCORE-->
+            <Border Grid.Column="1" Style="{StaticResource BorderInfo}">
+                <StackPanel Style="{StaticResource StackPanel}">
+                    <TextBlock Style="{StaticResource UnchangedText}"
                     Text="High Score"/>
-                <TextBox Name="NumHighScore"
-                    Text="0"/>
-            </StackPanel>
+                    <TextBlock Name="NumHighScore" 
+                               Style="{StaticResource ChangedText}"
+                               Text="0"/>
+                </StackPanel>
+            </Border>
         </Grid>
-        
+
         <!--Game blocks-->
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="2" 
+              Background="{StaticResource BackgroundBoard}"
+              Margin="20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -58,43 +72,43 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="0"
-                       Text="" Name="txt00"/>
-            <TextBlock Grid.Row="0" Grid.Column="1"
-                       Text="" Name="txt01"/>
-            <TextBlock Grid.Row="0" Grid.Column="2"
-                       Text="" Name="txt02"/>
-            <TextBlock Grid.Row="0" Grid.Column="3"
-                       Text="" Name="txt03"/>
-            
-            <TextBlock Grid.Row="1" Grid.Column="0"
-                       Text="" Name="txt10"/>
-            <TextBlock Grid.Row="1" Grid.Column="1"
-                       Text="" Name="txt11"/>
-            <TextBlock Grid.Row="1" Grid.Column="2"
-                       Text="" Name="txt12"/>
-            <TextBlock Grid.Row="1" Grid.Column="3"
-                       Text="" Name="txt13"/>
-            
-            <TextBlock Grid.Row="2" Grid.Column="0"
-                       Text="" Name="txt20"/>
-            <TextBlock Grid.Row="2" Grid.Column="1"
-                       Text="" Name="txt21"/>
-            <TextBlock Grid.Row="2" Grid.Column="2"
-                       Text="" Name="txt22"/>
-            <TextBlock Grid.Row="2" Grid.Column="3"
-                       Text="" Name="txt23"/>
-            
-            <TextBlock Grid.Row="3" Grid.Column="0"
-                       Text="" Name="txt30"/>
-            <TextBlock Grid.Row="3" Grid.Column="1"
-                       Text="" Name="txt31"/>
-            <TextBlock Grid.Row="3" Grid.Column="2"
-                       Text="" Name="txt32"/>
-            <TextBlock Grid.Row="3" Grid.Column="3"
-                       Text="" Name="txt33"/>
+            <Button Grid.Row="0" Grid.Column="0"
+                       Content="2" Name="txt00" Style="{StaticResource Block}"/>
+            <Button Grid.Row="0" Grid.Column="1"
+                       Content="4" Name="txt01" Style="{StaticResource Block}"/>
+            <Button Grid.Row="0" Grid.Column="2"
+                       Content="8" Name="txt02" Style="{StaticResource Block}"/>
+            <Button Grid.Row="0" Grid.Column="3"
+                       Content="16" Name="txt03" Style="{StaticResource Block}"/>
+
+            <Button Grid.Row="1" Grid.Column="0"
+                       Content="" Name="txt10" Style="{StaticResource Block}"/>
+            <Button Grid.Row="1" Grid.Column="1"
+                       Content="" Name="txt11" Style="{StaticResource Block}"/>
+            <Button Grid.Row="1" Grid.Column="2"
+                       Content="" Name="txt12" Style="{StaticResource Block}"/>
+            <Button Grid.Row="1" Grid.Column="3"
+                       Content="32" Name="txt13" Style="{StaticResource Block}"/>
+
+            <Button Grid.Row="2" Grid.Column="0"
+                       Content="2048" Name="txt20" Style="{StaticResource Block}"/>
+            <Button Grid.Row="2" Grid.Column="1"
+                       Content="" Name="txt21" Style="{StaticResource Block}"/>
+            <Button Grid.Row="2" Grid.Column="2"
+                       Content="" Name="txt22" Style="{StaticResource Block}"/>
+            <Button Grid.Row="2" Grid.Column="3"
+                       Content="64" Name="txt23" Style="{StaticResource Block}"/>
+
+            <Button Grid.Row="3" Grid.Column="0"
+                       Content="1024" Name="txt30" Style="{StaticResource Block}"/>
+            <Button Grid.Row="3" Grid.Column="1"
+                       Content="512" Name="txt31" Style="{StaticResource Block}"/>
+            <Button Grid.Row="3" Grid.Column="2"
+                       Content="256" Name="txt32" Style="{StaticResource Block}"/>
+            <Button Grid.Row="3" Grid.Column="3"
+                       Content="128" Name="txt33" Style="{StaticResource Block}"/>
         </Grid>
-        
-        
+
+
     </Grid>
 </Window>
