@@ -110,8 +110,6 @@ namespace HW6_Binding
                 MessageBox.Show($"Error loading data from file: {ex.Message}");
             }
         }
-
-
         private void btn_Add_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -133,12 +131,38 @@ namespace HW6_Binding
             }
             catch (Exception ex) { }
         }
+
+        private void btn_Remove_Click(object sender, RoutedEventArgs e)
+        {
+            ListOfPeoples list = Resources["ListOfPeople"] as ListOfPeoples;
+            if (list.Index_selected_listbox == -1) return;
+
+            list.Peoples.Remove(list.Peoples[list.Index_selected_listbox]);
+        }
+
+        private void btn_Update_Click(object sender, RoutedEventArgs e)
+        {
+            ListOfPeoples list = Resources["ListOfPeople"] as ListOfPeoples;
+            if (list.Index_selected_listbox == -1) return;
+            People people = list.Peoples[list.Index_selected_listbox];
+
+            people.FullName = list.FullNamePeople;
+            people.Address = list.AddressPeople;
+            people.NumberPhone = list.NumberPhonePeople;
+
+        }
     }
 
     public class ListOfPeoples : INotifyPropertyChanged
     {
-        public ObservableCollection<People> Peoples { get; set; } = new ObservableCollection<People>();
-        
+        private ObservableCollection<People> _Peoples = new ObservableCollection<People>();
+
+        public ObservableCollection<People> Peoples
+        {
+            get { return _Peoples; }
+            set { _Peoples = value; OnPropertyChanged(new PropertyChangedEventArgs(nameof(Peoples))); }
+        }
+
         private string _FullName;
         private string _Address;
         private string _NumberPhone;
@@ -187,14 +211,12 @@ namespace HW6_Binding
             PropertyChanged?.Invoke(this, e);
         }
     }
+    
     [Serializable]
     public class People : INotifyPropertyChanged
     {
-        [DataMember]
         private string _FullName;
-        [DataMember]
         private string _Address;
-        [DataMember]
         private string _NumberPhone;
         public string FullName
         {
