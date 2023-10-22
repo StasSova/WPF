@@ -4,27 +4,49 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HW6_Binding"
+        
+        xmlns:viewmodel="clr-namespace:HW6_Binding.ViewModel"
+        
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" x:Name="mainWindow">
+        Title="Peoples book" 
+        Height="450" MinHeight="440"
+        Width="792" MinWidth="470"
+        x:Name="mainWindow">
 
     <Window.Resources>
-        <local:ListOfPeoples x:Key="ListOfPeople" FullNamePeople="Stas" AddressPeople="Odessa" NumberPhonePeople="066111111"/>
+        <ResourceDictionary>
+
+            <LinearGradientBrush x:Key="BackgroundDetailsInfoStyle" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="Blue" Offset="0"/>
+                <GradientStop Color="Aqua" Offset="0.1"/>
+                <GradientStop Color="AliceBlue" Offset="1.3"/>
+            </LinearGradientBrush>
+
+            <LinearGradientBrush x:Key="BackgroundListPeopleStyle" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="Aquamarine" Offset="0"/>
+                <GradientStop Color="Aqua" Offset="0.1"/>
+                <GradientStop Color="Blue" Offset="1.3"/>
+            </LinearGradientBrush>
+
+        </ResourceDictionary>
     </Window.Resources>
 
-    <Grid DataContext="{StaticResource ListOfPeople}">
+    <Window.DataContext>
+        <viewmodel:VM_ListPeoples/>
+    </Window.DataContext>
+    <Grid>
+
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1.5*"/>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0">
-            <Grid.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                    <GradientStop Color="Blue" Offset="0"/>
-                    <GradientStop Color="Aqua" Offset="0.1"/>
-                    <GradientStop Color="AliceBlue" Offset="1.3"/>
-                </LinearGradientBrush>
-            </Grid.Background>
+        <!--DETAILS INFO ABOUT PEOPEL-->
+        <Grid 
+            Grid.Column="0"
+            MinWidth="200"
+            MinHeight="420"
+            Background="{StaticResource BackgroundDetailsInfoStyle}">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -33,102 +55,97 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" 
-                       HorizontalAlignment="Center"
-                       FontSize="30"
-                       FontStyle="Italic"
-                       >Details</TextBlock>
+            <!--HEADER-->
+            <TextBlock 
+                Grid.Row="0" 
+                HorizontalAlignment="Center"
+                FontSize="30"
+                FontStyle="Italic">
+                Details
+            </TextBlock>
 
-            <StackPanel Grid.Row="1" HorizontalAlignment="Stretch"
-                        VerticalAlignment="Top">
+            <!--INFO BLOCK-->
+            <StackPanel 
+                Grid.Row="1" 
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top">
 
-                <StackPanel Margin="15,40,20,0">
-                    <Label Content="Name"/>
-                    <TextBox Text="{Binding FullNamePeople}"/>
+                <!--NAME-->
+                <StackPanel 
+                    Margin="15,40,20,0">
+                    <Label 
+                        Content="Name"/>
+                    <TextBox 
+                        Text="{Binding FullNamePeople}"/>
                 </StackPanel>
 
-                <StackPanel Margin="15,20,20,20">
-                    <Label Content="Address"/>
-                    <TextBox Text="{Binding AddressPeople}"/>
+                <!--ADDRESS-->
+                <StackPanel 
+                    Margin="15,20,20,20">
+                    <Label 
+                        Content="Address"/>
+                    <TextBox 
+                        Text="{Binding AddressPeople}"/>
                 </StackPanel>
 
-                <StackPanel Margin="15,0,20,0">
-                    <Label Content="Number phone"/>
-                    <TextBox Text="{Binding NumberPhonePeople}"/>
+                <!--NUMBER PHONE-->
+                <StackPanel 
+                    Margin="15,0,20,0">
+                    <Label 
+                        Content="Number phone"/>
+                    <TextBox 
+                        Text="{Binding NumberPhonePeople}"/>
                 </StackPanel>
 
             </StackPanel>
 
+            <!--BUTTONS BLOCK-->
             <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal"
                         Margin="20,10,20,10">
-                <Button Content="Add" Style="{StaticResource ButtonRestartGame}" Click="btn_Add_Click"/>
-                <Button Content="Remove" Style="{StaticResource ButtonRestartGame}" Click="btn_Remove_Click"/>
-                <Button Content="Update" Style="{StaticResource ButtonRestartGame}" Click="btn_Update_Click"/>
+                <!--ADD PEOPLE-->
+                <Button 
+                    Style="{StaticResource ButtonRestartGame}" 
+                    Content="ADD" 
+                    Command="{Binding AddPeople}"/>
+                <!--REMOVE PEOPLE-->
+                <Button 
+                    Style="{StaticResource ButtonRestartGame}" 
+                    Content="REMOVE" 
+                    Command="{Binding RemovePeople}"/>
+                <!--UPDATE PEOPLE-->
+                <Button 
+                    Style="{StaticResource ButtonRestartGame}" 
+                    Content="UPDATE" 
+                    Command="{Binding UpdateInforamtion}"/>
             </StackPanel>
 
-            <StackPanel Grid.Row="3" HorizontalAlignment="Right" Orientation="Horizontal"
-                        Margin="0,0,20,20">
-                <Button Content="save" Style="{StaticResource ButtonRestartGame}" Click="btn_Update_Click"/>
+            <!--WORK WITH A FILE BLOCK-->
+            <StackPanel 
+                Grid.Row="3" 
+                HorizontalAlignment="Right" 
+                Orientation="Horizontal"
+                Margin="0,0,20,20">
+
+                <Button 
+                    Style="{StaticResource ButtonRestartGame}" 
+                    Content="SAVE" 
+                    Command="{Binding SaveInformation}"/>
             </StackPanel>
         </Grid>
 
+        <!--LIST OF PEOPLES-->
         <ScrollViewer Grid.Column="1">
-            <ListBox Grid.Column="1"
-                     ItemsSource="{Binding Peoples, Mode=TwoWay}"
-                     SelectedIndex="{Binding Index_selected_listbox, Mode=TwoWay}"
-                     SelectionChanged="ListBox_SelectionChanged"
-                     ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
-            <ListBox.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                    <GradientStop Color="Aquamarine" Offset="0"/>
-                    <GradientStop Color="Aqua" Offset="0.1"/>
-                    <GradientStop Color="Blue" Offset="1.3"/>
-                </LinearGradientBrush>
-            </ListBox.Background>
-
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderBrush="Bisque" BorderThickness="1" Margin="10">
-                        <StackPanel Margin="10">
-                            <TextBox Text="{Binding FullName}"  FontWeight="Bold"/>
-                            <TextBox Text="{Binding Address}"/>
-                            <TextBox Text="{Binding NumberPhone}"/>
-                        </StackPanel>
-                    </Border>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-
-
-        </ListBox>
-        </ScrollViewer>
-
-    </Grid>
-    <!--<ScrollViewer>
-
-        <StackPanel DataContext="{StaticResource ListOfPeople}">
-            <StackPanel Orientation="Horizontal">
-                <TextBox Text="{Binding FullNamePeople}" Width="100"/>
-                <TextBox Text="{Binding AddressPeople}" Width="100"/>
-                <TextBox Text="{Binding NumberPhonePeople}" Width="100"/>
-                <Button Click="btn_Add_Click">Add</Button>
-                <Button Click="Button_Click">RemoveSelected</Button>
-                <Button Click="Button_Click_1">Update</Button>
-            </StackPanel>
-
-            <ListBox
-                Width="400" Height="400"
+<!--I don't know how to bind to an event-->
+            <ListBox 
+                Grid.Column="1"
                 ItemsSource="{Binding Peoples, Mode=TwoWay}"
-                IsSynchronizedWithCurrentItem="True"
                 SelectedIndex="{Binding Index_selected_listbox, Mode=TwoWay}"
                 SelectionChanged="ListBox_SelectionChanged"
-                ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                Background="{StaticResource BackgroundListPeopleStyle}">
+
+                <!--ITEM TEMPLATE-->
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border BorderBrush="Bisque" BorderThickness="1" Margin="10">
@@ -148,8 +165,7 @@
                 </ListBox.ItemsPanel>
 
             </ListBox>
-        </StackPanel>
-    </ScrollViewer>-->
+        </ScrollViewer>
 
-
+    </Grid>
 </Window>
