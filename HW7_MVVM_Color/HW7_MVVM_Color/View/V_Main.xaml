@@ -1,0 +1,251 @@
+﻿<Window x:Class="HW7_MVVM_Color.View.V_Main"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HW7_MVVM_Color.View"
+        xmlns:vm="clr-namespace:HW7_MVVM_Color.ViewModel"
+        mc:Ignorable="d"
+        Title="V_Main" 
+        Height="450" MinHeight="300"
+        Width="800" MinWidth="300"
+        Background="{DynamicResource BackgroundWindow}">
+
+    <Window.Resources>
+        <ResourceDictionary>
+
+            <vm:VM_Main x:Key="ViewModel"/>
+
+            <LinearGradientBrush x:Key="BackgroundWindow" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="DarkGray" Offset="0"/>
+                <GradientStop Color="Gray" Offset="0.33"/>
+                <GradientStop Color="LightGray" Offset="0.66"/>
+            </LinearGradientBrush>
+
+            <Style x:Key="st_LabelValue" TargetType="Label">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+            </Style>
+
+            <Style x:Key="st_CheckBoxProperty" TargetType="CheckBox">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalContentAlignment" Value="Right"/>
+            </Style>
+
+            <Style x:Key="st_SliderProperty" TargetType="Slider">
+                <Setter Property="Margin" Value="20,0,20,0"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Maximum" Value="255"/>
+                <Setter Property="Interval" Value="1"/>
+            </Style>
+
+            <Style x:Key="st_ButtonAction" TargetType="Button">
+                <Setter Property="Padding" Value="5"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
+                <Setter Property="BorderBrush" Value="Black"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border
+                                CornerRadius="5"
+                                BorderThickness="3"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Background="Transparent"
+                                Margin="{TemplateBinding Margin}"
+                                Padding="{TemplateBinding Padding}">
+                                <ContentPresenter 
+                                    HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center"
+                                    Content="{TemplateBinding Content}"/>
+                            </Border> 
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+                <Style.Triggers>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="BorderBrush" Value="Red"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid
+        DataContext="{StaticResource ViewModel}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!-- SETTINGS COLOR-->
+        <Grid Grid.Row="0"
+              Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!--ALPHA-->
+            <!--Check Box-->
+            <CheckBox
+                x:Name="cb_Alpha"
+                Grid.Row="0"
+                Grid.Column="0"
+                Content="Alpha: "
+                Style="{StaticResource st_CheckBoxProperty}"/>
+            <!--Value-->
+            <Label
+                Grid.Row="0"
+                Grid.Column="1"
+                Style="{StaticResource st_LabelValue}"
+                Content="{Binding CurrentColor.A}"/>
+            <!--Slider-->
+            <Slider
+                Grid.Row="0"
+                Grid.Column="2"
+                HorizontalAlignment="Stretch"
+                Style="{StaticResource st_SliderProperty}"
+                Value="{Binding CurrentColor.A, Mode=TwoWay}"
+                IsEnabled="{Binding ElementName=cb_Alpha, Path=IsChecked}"/>
+
+
+            <!--RED-->
+            <!--Check Box-->
+            <CheckBox
+                x:Name="cb_Red"
+                Grid.Row="1"
+                Grid.Column="0"
+                Content="Red: "
+                Style="{StaticResource st_CheckBoxProperty}"/>
+            <!--Value-->
+            <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                Style="{StaticResource st_LabelValue}"
+                Content="{Binding CurrentColor.R}"/>
+            <!--Slider-->
+            <Slider
+                Grid.Row="1"
+                Grid.Column="2"
+                HorizontalAlignment="Stretch"
+                Style="{StaticResource st_SliderProperty}"
+                Value="{Binding CurrentColor.R, Mode=TwoWay}"
+                IsEnabled="{Binding ElementName=cb_Red, Path=IsChecked}"/>
+            
+            
+            <!--GREEN-->
+            <!--Check Box-->
+            <CheckBox
+                x:Name="cb_Green"
+                Grid.Row="2"
+                Grid.Column="0"
+                Content="Green: "
+                Style="{StaticResource st_CheckBoxProperty}"/>
+            <!--Value-->
+            <Label
+                Grid.Row="2"
+                Grid.Column="1"
+                Style="{StaticResource st_LabelValue}"
+                Content="{Binding CurrentColor.G}"/>
+            <!--Slider-->
+            <Slider
+                Grid.Row="2"
+                Grid.Column="2"
+                HorizontalAlignment="Stretch"
+                Style="{StaticResource st_SliderProperty}"
+                Value="{Binding CurrentColor.G, Mode=TwoWay}"
+                IsEnabled="{Binding ElementName=cb_Green, Path=IsChecked}"/>
+
+
+            <!--BLUE-->
+            <!--Check Box-->
+            <CheckBox
+                x:Name="cb_Blue"
+                Grid.Row="3"
+                Grid.Column="0"
+                Content="Blue: "
+                Style="{StaticResource st_CheckBoxProperty}"/>
+            <!--Value-->
+            <Label
+                Grid.Row="3"
+                Grid.Column="1"
+                Style="{StaticResource st_LabelValue}"
+                Content="{Binding CurrentColor.B}"/>
+            <!--Slider-->
+            <Slider
+                Grid.Row="3"
+                Grid.Column="2"
+                HorizontalAlignment="Stretch"
+                Style="{StaticResource st_SliderProperty}"
+                Value="{Binding CurrentColor.B, Mode=TwoWay}"
+                IsEnabled="{Binding ElementName=cb_Blue, Path=IsChecked}"/>
+
+            <!--BLOCK COLOR-->
+            <TextBlock
+                Grid.Row="0"
+                Grid.RowSpan="4"
+                Grid.Column="3"
+                Background="{Binding CurrentColor.Name}"/>
+
+        </Grid>
+        <!--CONTROLS-->
+        <StackPanel
+            Grid.Row="1"
+            Orientation="Horizontal"
+            HorizontalAlignment="Center">
+            <Button 
+                Content="Add"
+                Command="{Binding AddCommand}"
+                Style="{StaticResource st_ButtonAction}"/>
+            <Button 
+                Content="Remove"
+                Command="{Binding RemoveCommand}"
+                Style="{StaticResource st_ButtonAction}"/>
+        </StackPanel>
+        <!--LIST BOX-->
+        <ScrollViewer
+            Grid.Row="2"
+            VerticalScrollBarVisibility="Auto">
+            <ListBox
+                Background="Transparent"
+                BorderBrush="Transparent"
+                HorizontalContentAlignment="Stretch"
+                SelectedIndex="{Binding Index}"
+                Margin="10,15,30,5"
+                ItemsSource="{Binding ColorList}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label 
+                            Grid.Column="0"
+                            Margin="20,0"
+                            Content="{Binding Name}"
+                            VerticalContentAlignment="Center"/>
+                            <TextBlock
+                            Grid.Column="1"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Stretch"
+                            Background="{Binding Name}"/>
+                        </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            
+        </ListBox>
+        </ScrollViewer>
+    </Grid>
+</Window>

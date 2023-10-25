@@ -121,11 +121,9 @@ namespace HW6_Binding.ViewModel
         }
         private bool CanAdd()
         {
-            //return !string.IsNullOrEmpty(FullNamePeople) &&
-            //       !string.IsNullOrEmpty(AddressPeople) &&
-            //       !string.IsNullOrEmpty(NumberPhonePeople);
-            return true;
-
+            return !string.IsNullOrEmpty(FullNamePeople) &&
+                   !string.IsNullOrEmpty(AddressPeople) &&
+                   !string.IsNullOrEmpty(NumberPhonePeople);
         }
         private void AddPeopleToList()
         {
@@ -149,11 +147,10 @@ namespace HW6_Binding.ViewModel
         }
         private bool CanRemove()
         {
-            return true;
+            return Index_selected_listbox != -1;
         }
         private void RemovePeopleFromList() 
-        {
-            if (Index_selected_listbox == -1) return;
+        { 
             Peoples.Remove(Peoples[index_selected_listbox]);
         }
         // Update the selected person's information

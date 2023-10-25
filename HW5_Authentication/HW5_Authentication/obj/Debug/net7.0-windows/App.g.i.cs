@@ -47,7 +47,7 @@ namespace HW5_Authentication {
         /// InitializeComponent
         /// </summary>
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "7.0.10.0")]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "7.0.12.0")]
         public void InitializeComponent() {
             if (_contentLoaded) {
                 return;
@@ -59,7 +59,7 @@ namespace HW5_Authentication {
             
             #line default
             #line hidden
-            System.Uri resourceLocater = new System.Uri("/HW5_Authentication;component/app.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/HW5_Authentication;V1.0.0.0;component/app.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\App.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
@@ -73,7 +73,7 @@ namespace HW5_Authentication {
         /// </summary>
         [System.STAThreadAttribute()]
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "7.0.10.0")]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "7.0.12.0")]
         public static void Main() {
             HW5_Authentication.App app = new HW5_Authentication.App();
             app.InitializeComponent();
