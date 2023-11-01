@@ -1,0 +1,194 @@
+﻿<Window x:Class="HW9_Resume_MVVM_INotify.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HW9_Resume_MVVM_INotify"
+        xmlns:VM="clr-namespace:HW9_Resume_MVVM_INotify.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+
+    
+    <Window.Resources>
+    </Window.Resources>
+
+    <Window.DataContext>
+        <VM:VM_Main />
+    </Window.DataContext>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+    
+        <!--ChangeSelectPerson-->
+        <ComboBox
+            Grid.Row="0">
+        <!--ItemsSource="">-->
+        </ComboBox>
+        
+        
+        
+        <!--Information-->
+        <Grid
+            Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" MinWidth="150"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!--Contact-->
+            <ScrollViewer
+                Grid.Column="0">
+                <StackPanel
+                    Orientation="Vertical">
+                    <!--TITLE-->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                    <!--Image-->
+                    <Image
+                        Grid.Row="0"
+                        Source="{Binding Current.ImageSource}"
+                        Stretch="Uniform"/>
+                    <!--NAME-->
+                    <TextBox
+                        Grid.Row="1"
+                        Text="{Binding Current.FullName}"
+                        TextWrapping="Wrap"
+                        FontSize="16"/>
+                    </Grid>
+                    <!--ABOUT-->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <!--Age-->
+                        <WrapPanel 
+                            Grid.Row="0"
+                            Orientation="Horizontal">
+                            <TextBlock
+                                Text="Возраст: "
+                                FontWeight="Bold"/>
+                            <TextBox
+                                Text="{Binding Current.Age}"/>
+                        </WrapPanel>
+                        <!--Post-->
+                        <WrapPanel 
+                            Grid.Row="1"
+                            Orientation="Horizontal">
+                            <TextBlock
+                                Text="Должность: "
+                                FontWeight="Bold"/>
+                            <TextBox
+                                Text="{Binding Current.Post}"/>
+                        </WrapPanel>
+                        <!--Salary-->
+                        <WrapPanel 
+                            Grid.Row="2"
+                            Orientation="Horizontal">
+                            <TextBlock
+                                Text="Заробтная плата: "
+                                FontWeight="Bold"/>
+                            <TextBox
+                                Text="{Binding Current.Salary}"/>
+                        </WrapPanel>
+                    </Grid>
+                    
+                    <!--Contacts-->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>    
+                        <!--HEADER-->
+                        <TextBlock
+                            Grid.Row="0"
+                            Text="КОНТАКТЫ"
+                            FontSize="20"/>
+                        <!--NumberPhone-->
+                        <WrapPanel
+                            Grid.Row="1">
+                            <TextBlock
+                                Text="Ph:"/>
+                            <TextBox
+                                Text="{Binding Current.Phone}"/>
+                        </WrapPanel>
+                        <!--Email-->
+                        <WrapPanel
+                            Grid.Row="2">
+                            <TextBlock
+                                Text="Em:"/>
+                            <TextBox
+                                Text="{Binding Current.Email}"/>
+                        </WrapPanel>
+                    </Grid>
+
+                    <!--Skill-->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <!--HEADRE-->
+                        <TextBlock
+                            Grid.Row="0"
+                            Text="НАВЫКИ"
+                            FontSize="20"/>
+
+                        <!--Proffesional-->
+                        <TextBlock
+                            Grid.Row="1"
+                            Text="Профессиональные"/>
+                        <TextBox
+                            Grid.Row="2"
+                            Text="{Binding Current.ProffSkill}"
+                            TextWrapping="Wrap"/>
+                        
+                        <!--Community-->
+                        <TextBlock
+                            Grid.Row="3"
+                            Text="Общие"/>
+                        <TextBox
+                            Grid.Row="4"
+                            Text="{Binding Current.CommSkill}"
+                            TextWrapping="Wrap"/>
+
+
+                    </Grid>
+                    
+                </StackPanel>
+            </ScrollViewer>
+            
+            <!--Work Info-->
+        
+        
+        
+        </Grid>
+        
+        
+        <!--Controls-->
+        <StackPanel
+            Grid.Row="2"
+            Orientation="Horizontal">
+            <Button
+                Content="Ok"/>
+            <Button
+                Content="Cancel"/>
+        </StackPanel>
+    </Grid>
+</Window>

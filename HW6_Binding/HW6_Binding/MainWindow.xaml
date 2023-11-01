@@ -13,6 +13,9 @@
         Width="792" MinWidth="470"
         x:Name="mainWindow">
 
+    <Window.DataContext>
+        <viewmodel:VM_ListPeoples/>
+    </Window.DataContext>
     <Window.Resources>
         <ResourceDictionary>
 
@@ -31,9 +34,6 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Window.DataContext>
-        <viewmodel:VM_ListPeoples/>
-    </Window.DataContext>
     <Grid>
 
         <Grid.ColumnDefinitions>

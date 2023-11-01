@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v7.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v7.0": {
+      "HW9_Resume_MVVM_INotify/1.0.0": {
+        "runtime": {
+          "HW9_Resume_MVVM_INotify.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "HW9_Resume_MVVM_INotify/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
