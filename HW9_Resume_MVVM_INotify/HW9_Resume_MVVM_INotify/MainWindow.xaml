@@ -11,13 +11,101 @@
 
     
     <Window.Resources>
+        <SolidColorBrush x:Key="Background_Contact" Color="#e4d9d7"/>
+        <Style x:Key="ImageWithShadow" TargetType="Image">
+            <Setter Property="Margin" Value="25"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Stretch" Value="Uniform"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="5" BlurRadius="10" Opacity="0.7"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="NamePeople" TargetType="TextBox">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="FontSize" Value="26"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+        </Style>
+
+        <Style x:Key="StaticText" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Black"/>
+        </Style>
+
+        <Style x:Key="BasicText" TargetType="TextBox">
+            <Setter Property="FontWeight" Value="Black"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+        </Style>
+
+        <Style x:Key="BorderGroup" TargetType="Border">
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Padding" Value="10"/>
+        </Style>
+
+        <Style x:Key="NameGroup" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+
+        <Style x:Key="SubTitle" TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Foreground" Value="DarkRed"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+        </Style>
+
+        <Style x:Key="st_ButtonAction" TargetType="Button">
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            CornerRadius="5"
+                            BorderThickness="3"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Background="Transparent"
+                            Margin="{TemplateBinding Margin}"
+                            Padding="{TemplateBinding Padding}">
+                            <ContentPresenter 
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Center"
+                                Content="{TemplateBinding Content}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="BorderBrush" Value="Red"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="Blue"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
     </Window.Resources>
 
     <Window.DataContext>
         <VM:VM_Main />
     </Window.DataContext>
     
-    <Grid>
+    <Grid
+        Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
@@ -26,11 +114,10 @@
     
         <!--ChangeSelectPerson-->
         <ComboBox
-            Grid.Row="0">
-        <!--ItemsSource="">-->
+            Grid.Row="0"
+            ItemsSource="{Binding Resumes}"
+            SelectedIndex="{Binding SelectedResume}">
         </ComboBox>
-        
-        
         
         <!--Information-->
         <Grid
@@ -39,32 +126,35 @@
                 <ColumnDefinition Width="*" MinWidth="150"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            
+
             <!--Contact-->
             <ScrollViewer
+                VerticalScrollBarVisibility="Auto"
                 Grid.Column="0">
                 <StackPanel
+                    Background="{StaticResource Background_Contact}"
                     Orientation="Vertical">
                     <!--TITLE-->
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
-                    <!--Image-->
-                    <Image
-                        Grid.Row="0"
-                        Source="{Binding Current.ImageSource}"
-                        Stretch="Uniform"/>
-                    <!--NAME-->
-                    <TextBox
-                        Grid.Row="1"
-                        Text="{Binding Current.FullName}"
-                        TextWrapping="Wrap"
-                        FontSize="16"/>
+                        <!--Image-->
+                        <Image
+                            Grid.Row="0"
+                            Source="{Binding Current.ImageSource}"
+                            Style="{StaticResource ImageWithShadow}"/>
+                        <!--NAME-->
+                        <TextBox
+                            Grid.Row="1"
+                            Text="{Binding Current.FullName}"
+                            Style="{StaticResource NamePeople}"/>
                     </Grid>
+                    
                     <!--ABOUT-->
-                    <Grid>
+                    <Grid
+                        Margin="0,10,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
@@ -76,7 +166,7 @@
                             Orientation="Horizontal">
                             <TextBlock
                                 Text="Возраст: "
-                                FontWeight="Bold"/>
+                                Style="{StaticResource StaticText}"/>
                             <TextBox
                                 Text="{Binding Current.Age}"/>
                         </WrapPanel>
@@ -86,7 +176,7 @@
                             Orientation="Horizontal">
                             <TextBlock
                                 Text="Должность: "
-                                FontWeight="Bold"/>
+                                Style="{StaticResource StaticText}"/>
                             <TextBox
                                 Text="{Binding Current.Post}"/>
                         </WrapPanel>
@@ -96,99 +186,384 @@
                             Orientation="Horizontal">
                             <TextBlock
                                 Text="Заробтная плата: "
-                                FontWeight="Bold"/>
+                                Style="{StaticResource StaticText}"/>
                             <TextBox
                                 Text="{Binding Current.Salary}"/>
                         </WrapPanel>
                     </Grid>
-                    
+
                     <!--Contacts-->
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                        </Grid.RowDefinitions>    
+                        </Grid.RowDefinitions>
                         <!--HEADER-->
-                        <TextBlock
+                        <Border
                             Grid.Row="0"
-                            Text="КОНТАКТЫ"
-                            FontSize="20"/>
-                        <!--NumberPhone-->
-                        <WrapPanel
-                            Grid.Row="1">
-                            <TextBlock
-                                Text="Ph:"/>
-                            <TextBox
-                                Text="{Binding Current.Phone}"/>
-                        </WrapPanel>
-                        <!--Email-->
-                        <WrapPanel
-                            Grid.Row="2">
-                            <TextBlock
-                                Text="Em:"/>
-                            <TextBox
-                                Text="{Binding Current.Email}"/>
-                        </WrapPanel>
+                            Style="{StaticResource BorderGroup}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!--TEXT-->
+                                <TextBlock
+                                    Grid.Column="0"
+                                    Text="Контакты"
+                                    Style="{StaticResource NameGroup}"/>
+                                <!--ADD-->
+                                <Button
+                                    Grid.Column="1"
+                                    Content="+"
+                                    Padding="10,0"
+                                    Margin="5,0"
+                                    Command="{Binding Current.AddContactCommand}"/>
+                                <!--REMOVE-->
+                                <Button
+                                    Grid.Column="2"
+                                    Content="-"
+                                    Padding="10,0"
+                                    Margin="5,0"
+                                    Command="{Binding Current.RemoveContactCommand}"/>
+                            </Grid>
+                        </Border>
+                        <ListBox
+                            Grid.Row="1"
+                            ItemsSource="{Binding Current.Contacts}"
+                            SelectedIndex="{Binding Current.Index_selectedContact}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBox 
+                                        Text="{Binding Info}"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
                     </Grid>
 
-                    <!--Skill-->
+                    <!--LANGUAGES-->
                     <Grid>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
                             <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <!--HEADER-->
+                        <Border
+                            Grid.Row="0"
+                            Style="{StaticResource BorderGroup}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <!--TEXT-->
+                                <TextBlock
+                                    Grid.Column="0"
+                                    Text="Знание языков"
+                                    Style="{StaticResource NameGroup}"/>
+                                <!--ADD-->
+                                <Button
+                                    Grid.Column="1"
+                                    Content="+"
+                                    Padding="10,0"
+                                    Margin="5,0"
+                                    Command="{Binding Current.AddLangCommand}"/>
+                                <!--REMOVE-->
+                                <Button
+                                    Grid.Column="2"
+                                    Content="-"
+                                    Padding="10,0"
+                                    Margin="5,0"
+                                    Command="{Binding Current.RemoveLangCommand}"/>
+                            </Grid>
+                        </Border>
+                        <ListBox
+                            Grid.Row="1"
+                            ItemsSource="{Binding Current.Languages}"
+                            SelectedIndex="{Binding Current.Index_selectedLanguage}"
+                            HorizontalContentAlignment="Stretch">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBox
+                                            Grid.Row="0"
+                                            MinWidth="40"
+                                            HorizontalAlignment="Left"
+                                            TextWrapping="Wrap"
+                                            Text="{Binding Language}"/>
+
+                                        <Slider
+                                            Grid.Row="1"
+                                            Value="{Binding Level}"
+                                            TickFrequency="1"
+                                            Minimum="1"
+                                            Maximum="5"
+                                            IsSnapToTickEnabled="True"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
+                    
+                    <!--SKILL-->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <!--HEADRE-->
-                        <TextBlock
-                            Grid.Row="0"
-                            Text="НАВЫКИ"
-                            FontSize="20"/>
-
-                        <!--Proffesional-->
-                        <TextBlock
-                            Grid.Row="1"
-                            Text="Профессиональные"/>
-                        <TextBox
-                            Grid.Row="2"
-                            Text="{Binding Current.ProffSkill}"
-                            TextWrapping="Wrap"/>
+                        <!--TEXT-->
+                        <Border 
+                            Style="{StaticResource BorderGroup}">
+                            <TextBlock
+                                Grid.Row="0"
+                                Text="НАВЫКИ"
+                                Style="{StaticResource NameGroup}"/>
+                        </Border>
                         
-                        <!--Community-->
-                        <TextBlock
-                            Grid.Row="3"
-                            Text="Общие"/>
-                        <TextBox
-                            Grid.Row="4"
-                            Text="{Binding Current.CommSkill}"
-                            TextWrapping="Wrap"/>
+                        <!--WORK SKILL-->
+                        <Grid
+                            Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <!--HEADER-->
+                            <Grid
+                                Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
 
+                                <!--TEXT-->
+                                <TextBlock
+                                    Grid.Column="0"
+                                    Text="Профессиональные навыки"
+                                    Style="{StaticResource SubTitle}"/>
+                                <!--ADD-->
+                                <Button
+                                    Grid.Column="1"
+                                    Content="+"
+                                    Padding="10,0"
+                                    Margin="5,0"
+                                    Command="{Binding Current.AddWorkSkillCommand}"/>
+                                <!--REMOVE-->
+                                <Button
+                                    Grid.Column="2"
+                                    Content="-"
+                                    Padding="10,0"
+                                    Margin="5,0"
+                                    Command="{Binding Current.RemoveWorkSkillCommand}"/>
+                            </Grid>
+                            <ListBox
+                                Grid.Row="1"
+                                ItemsSource="{Binding Current.WorkSkills}"
+                                SelectedIndex="{Binding Current.Index_selectedWorkSkill}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel 
+                                            Orientation="Horizontal">
+                                            <TextBlock 
+                                                Text="* "/>
+                                            <TextBox
+                                                Text="{Binding SkillName}"
+                                                TextWrapping="Wrap"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Grid>
+                        
+                        
+                        
+                        <!--SOCIAL SKILL-->
+                        <Grid
+                            Grid.Row="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <!--HEADER-->
+                            <Grid
+                                Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
 
+                                <!--TEXT-->
+                                <TextBlock
+                                    Grid.Column="0"
+                                    Text="Социальные навыки"
+                                    Style="{StaticResource SubTitle}"/>
+                                <!--ADD-->
+                                <Button
+                                    Grid.Column="1"
+                                    Content="+"
+                                    Padding="10,0"
+                                    Margin="5,0"
+                                    Command="{Binding Current.AddSocialSkillCommand}"/>
+                                <!--REMOVE-->
+                                <Button
+                                    Grid.Column="2"
+                                    Content="-"
+                                    Padding="10,0"
+                                    Margin="5,0"
+                                    Command="{Binding Current.RemoveSocialSkillCommand}"/>
+                            </Grid>
+                            <ListBox
+                                Grid.Row="1"
+                                ItemsSource="{Binding Current.SocialSkills}"
+                                SelectedIndex="{Binding Current.Index_selectedSocialSkill}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel 
+                                            Orientation="Horizontal">
+                                            <TextBlock 
+                                                Text="* "/>
+                                            <TextBox
+                                                Text="{Binding SkillName}"
+                                                TextWrapping="Wrap"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Grid>
                     </Grid>
-                    
+
                 </StackPanel>
             </ScrollViewer>
-            
+
             <!--Work Info-->
-        
-        
-        
+            <ScrollViewer
+                VerticalScrollBarVisibility="Auto"                
+                Grid.Column="1">
+                <StackPanel>
+                    <!--EXPIRIENCE-->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        
+                        <!--HEADER-->
+                        <Border
+                            Grid.Row="0"
+                            Style="{StaticResource BorderGroup}">
+                            
+                            <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!--TEXT-->
+                            <TextBlock
+                                Grid.Column="0"
+                                Text="ОПЫТ РАБОТЫ"/>
+                            <!--ADD-->
+                            <Button
+                                Grid.Column="1"
+                                Content="+"
+                                Padding="10,0"
+                                Margin="5,0"
+                                Command="{Binding Current.AddJobCommand}"/>
+                            <!--REMOVE-->
+                            <Button
+                                Grid.Column="2"
+                                Content="-"
+                                Padding="10,0"
+                                Margin="5,0"
+                                Command="{Binding Current.RemoveJobCommand}"/>
+                        </Grid>
+                        </Border>
+                        <ListBox
+                            Grid.Row="1"
+                            ItemsSource="{Binding Current.Jobs}"
+                            SelectedIndex="{Binding Current.Index_selectedJob}"
+                            HorizontalContentAlignment="Stretch">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+                                        <!--DATE-->
+                                        <WrapPanel
+                                            Grid.Row="0"
+                                            Orientation="Horizontal">
+                                            <TextBox
+                                                Text="{Binding StartDate}"
+                                                Style="{StaticResource BasicText}"/>
+                                            <TextBlock 
+                                                Text="-"
+                                                Style="{StaticResource StaticText}"/>
+                                            <TextBox
+                                                Text="{Binding EndDate}"
+                                                Style="{StaticResource BasicText}"/>
+                                        </WrapPanel>
+                                        <!--Info-->
+                                        <StackPanel
+                                            Grid.Row="1"
+                                            Orientation="Vertical">
+                                            <!--Company-->
+                                            <StackPanel
+                                                Orientation="Horizontal">
+                                                <TextBlock
+                                                    Text="Огранизация: "
+                                                    Style="{StaticResource StaticText}"/>
+                                                <TextBox
+                                                    Text="{Binding Company}"/>
+                                            </StackPanel>
+                                            <!--State-->
+                                            <StackPanel
+                                                Orientation="Horizontal">
+                                                <TextBlock
+                                                    Text="Должность: "
+                                                    Style="{StaticResource StaticText}"/>
+                                                <TextBox
+                                                    Text="{Binding Post}"/>
+                                            </StackPanel>
+                                            <!--Description-->
+                                            <TextBlock 
+                                                Text="Описание:"
+                                                Style="{StaticResource StaticText}"/>
+                                            <TextBox
+                                                Text="{Binding Description}"
+                                                TextWrapping="Wrap"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
         </Grid>
-        
-        
+
         <!--Controls-->
         <StackPanel
             Grid.Row="2"
-            Orientation="Horizontal">
+            Orientation="Horizontal"
+            HorizontalAlignment="Center">
             <Button
-                Content="Ok"/>
+                Content="Ok"
+                Style="{StaticResource st_ButtonAction}"/>
             <Button
-                Content="Cancel"/>
+                Content="Cancel"
+                Style="{StaticResource st_ButtonAction}"/>
         </StackPanel>
     </Grid>
 </Window>
