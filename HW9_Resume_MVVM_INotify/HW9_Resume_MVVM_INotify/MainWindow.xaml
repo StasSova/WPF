@@ -560,10 +560,12 @@
             HorizontalAlignment="Center">
             <Button
                 Content="Ok"
-                Style="{StaticResource st_ButtonAction}"/>
+                Style="{StaticResource st_ButtonAction}"
+                Command="{Binding Current.SaveCommand}"/>
             <Button
                 Content="Cancel"
-                Style="{StaticResource st_ButtonAction}"/>
+                Style="{StaticResource st_ButtonAction}"
+                Command="{Binding Current.LoadCommand}"/>
         </StackPanel>
     </Grid>
 </Window>

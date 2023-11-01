@@ -10,6 +10,16 @@ namespace HW9_Resume_MVVM_INotify.ViewModel.TEMPLATE
     public class VM_Contact: VM_Base
     {
         private M_Contact _contact;
+        public M_Contact Contact
+        {
+            get { return _contact; }
+            set 
+            { 
+                _contact = value; 
+                OnPropertyChanged(nameof(Contact));
+            }
+
+        }
         public string Info
         {
             get { return _contact.Info; }

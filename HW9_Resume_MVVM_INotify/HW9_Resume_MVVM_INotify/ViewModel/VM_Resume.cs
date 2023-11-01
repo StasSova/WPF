@@ -230,6 +230,122 @@ namespace HW9_Resume_MVVM_INotify.ViewModel
 
 
 
+        // SAVE
+        public ICommand SaveCommand
+        {
+            get
+            {
+                if (_save == null) _save = new DelegateCommand(exec => Save(), can => CanSave());
+                return _save;
+            }
+        }
+        private DelegateCommand _save;
+        private bool CanSave()
+        {
+            return true;
+        }
+        private void Save()
+        {
+            model.FullName = FullName;
+            model.Age = Age;
+            model.Post = Post;
+            model.Salary = Salary;
+
+            foreach (VM_Job job in Jobs) 
+            {
+                model.Jobs.Add(job.Model);
+            }
+
+            foreach (VM_Contact cont in Contacts)
+            {
+                model.Contacts.Add(cont.Contact);
+            }
+
+            foreach(var cont in SocialSkills)
+            {
+                model.SocialSkill.Add(cont.Skill);
+            }
+
+            foreach(var sk in WorkSkills)
+            {
+                model.WorkSkill.Add(sk.Skill);
+            }
+
+            foreach(var ln in Languages)
+            {
+                model.Languages.Add(ln.Lang);
+            }
+
+        }
+
+
+        // LOAD
+        public ICommand LoadCommand
+        {
+            get
+            {
+                if (_load == null) _load = new DelegateCommand(exec => Load(), can => CanLoad());
+                return _load;
+            }
+        }
+        private DelegateCommand _load;
+
+        private bool CanLoad()
+        {
+            return true;
+        }
+
+        private void Load()
+        {
+            FullName = model.FullName;
+            Age = model.Age;
+            Post = model.Post;
+            Salary = model.Salary;
+
+            // Очищаем коллекции, чтобы избежать дублирования данных при повторной загрузке
+            Jobs.Clear();
+            Contacts.Clear();
+            SocialSkills.Clear();
+            WorkSkills.Clear();
+            Languages.Clear();
+
+            // Загрузка данных из модели в коллекции ViewModel
+            foreach (var jobModel in model.Jobs)
+            {
+                VM_Job jobViewModel = new VM_Job();
+                jobViewModel.Model = jobModel;
+                Jobs.Add(jobViewModel);
+            }
+
+            foreach (var contactModel in model.Contacts)
+            {
+                VM_Contact contactViewModel = new VM_Contact();
+                contactViewModel.Contact = contactModel;
+                Contacts.Add(contactViewModel);
+            }
+
+            foreach (var socialSkillModel in model.SocialSkill)
+            {
+                VM_Skill skillViewModel = new VM_Skill();
+                skillViewModel.Skill = socialSkillModel;
+                SocialSkills.Add(skillViewModel);
+            }
+
+            foreach (var workSkillModel in model.WorkSkill)
+            {
+                VM_Skill skillViewModel = new VM_Skill();
+                skillViewModel.Skill = workSkillModel;
+                WorkSkills.Add(skillViewModel);
+            }
+
+            foreach (var languageModel in model.Languages)
+            {
+                VM_Language languageViewModel = new VM_Language();
+                languageViewModel.Lang = languageModel;
+                Languages.Add(languageViewModel);
+            }
+        }
+
 
 
         public string ImageSource

@@ -10,7 +10,16 @@ namespace HW9_Resume_MVVM_INotify.ViewModel.TEMPLATE
     public class VM_Job: VM_Base
     {
         private M_Job model;
-        public  VM_Job() 
+        public M_Job Model
+        {
+            get { return model; }
+            set 
+            { 
+                model = value; 
+                OnPropertyChanged(nameof(Model));
+            }
+        }
+        public VM_Job() 
         { model = new M_Job(); }
 
         public string StartDate
