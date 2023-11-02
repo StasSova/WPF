@@ -15,11 +15,83 @@ namespace HW9_Resume_MVVM_INotify.ViewModel
     public class VM_Resume : VM_Base
     {
         private M_Resume model;
+        public ObservableCollection<VM_Contact> Contacts { get; set; }
+        public ObservableCollection<VM_Language> Languages { get; set; }
+        public ObservableCollection<VM_Skill> WorkSkills { get; set; }
+        public ObservableCollection<VM_Skill> SocialSkills { get; set; }
+        public ObservableCollection<VM_Job> Jobs { get; set; }
+
+
+        public string ImageSource
+        {
+            get { return model.SourceImage; }
+            set
+            {
+                model.SourceImage = value;
+                OnPropertyChanged(nameof(ImageSource));
+            }
+        }
+        private string _fullName;
+        public string FullName
+        {
+            get { return _fullName; }
+            set
+            {
+                _fullName = value;
+                OnPropertyChanged(nameof(FullName));
+            }
+        }
+        private string _age;
+        public string Age
+        {
+            get { return _age; }
+            set
+            {
+                _age = value;
+                OnPropertyChanged(nameof(Age));
+            }
+        }
+        private string _post;
+        public string Post
+        {
+            get { return _post; }
+            set
+            {
+                _post = value;
+                OnPropertyChanged(nameof(Post));
+            }
+        }
+        public string _salary;
+        public string Salary
+        {
+            get { return _salary; }
+            set
+            {
+                _salary = value;
+                OnPropertyChanged(nameof(Salary));
+            }
+        }
+        public VM_Resume(M_Resume resume)
+        {
+            if (resume == null) return;
+            this.model = resume;
+            Load();
+        }
+        public VM_Resume()
+        {
+            model = new M_Resume();
+            Load();
+        }
+        public override string ToString()
+        {
+            return $"{FullName}, {Age}, {Post}";
+        }
+
+
 
 
         // CONTACTS
-        public ObservableCollection<VM_Contact> Contacts { get; set; }
-        
+
         // REMOVE CONTACT
         public int Index_selectedContact { get; set; }
         public ICommand RemoveContactCommand
@@ -63,7 +135,6 @@ namespace HW9_Resume_MVVM_INotify.ViewModel
 
 
         // LANGUAGES
-        public ObservableCollection<VM_Language> Languages { get; set; }
         // REMOVE LANG
         public int Index_selectedLanguage { get; set; }
         public ICommand RemoveLangCommand
@@ -105,7 +176,6 @@ namespace HW9_Resume_MVVM_INotify.ViewModel
         
 
         // WORK SKILL
-        public ObservableCollection<VM_Skill> WorkSkills { get; set; }
         // REMOVE WORK SKILL
         public int Index_selectedWorkSkill { get; set; }
         public ICommand RemoveWorkSkillCommand
@@ -147,7 +217,6 @@ namespace HW9_Resume_MVVM_INotify.ViewModel
         
         
         // SOCIAL SKILL
-        public ObservableCollection<VM_Skill> SocialSkills { get; set; }
         // REMOVE SOCIAL SKILL
         public int Index_selectedSocialSkill { get; set; }
         public ICommand RemoveSocialSkillCommand
@@ -189,7 +258,6 @@ namespace HW9_Resume_MVVM_INotify.ViewModel
        
 
         // JOB
-        public ObservableCollection<VM_Job> Jobs { get; set; }
         // REMOVE JOB
         public int Index_selectedJob { get; set; }
         public ICommand RemoveJobCommand
@@ -251,27 +319,38 @@ namespace HW9_Resume_MVVM_INotify.ViewModel
             model.Post = Post;
             model.Salary = Salary;
 
+            if (model.Jobs == null) model.Jobs = new List<M_Job>();
+            model.Jobs.Clear();
             foreach (VM_Job job in Jobs) 
             {
                 model.Jobs.Add(job.Model);
             }
 
+            if (model.Contacts == null) model.Contacts = new List<M_Contact>();
+            model.Contacts.Clear();
             foreach (VM_Contact cont in Contacts)
             {
                 model.Contacts.Add(cont.Contact);
             }
 
-            foreach(var cont in SocialSkills)
+
+            if (model.SocialSkill == null) model.SocialSkill = new List<M_Skill>();
+            model.SocialSkill.Clear();
+            foreach (var cont in SocialSkills)
             {
                 model.SocialSkill.Add(cont.Skill);
             }
 
-            foreach(var sk in WorkSkills)
+            if (model.WorkSkill == null) model.WorkSkill = new List<M_Skill>();
+            model.WorkSkill.Clear();
+            foreach (var sk in WorkSkills)
             {
                 model.WorkSkill.Add(sk.Skill);
             }
 
-            foreach(var ln in Languages)
+            if (model.Languages == null) model.Languages = new List<M_Language>();
+            model.Languages.Clear();
+            foreach (var ln in Languages)
             {
                 model.Languages.Add(ln.Lang);
             }
@@ -289,12 +368,10 @@ namespace HW9_Resume_MVVM_INotify.ViewModel
             }
         }
         private DelegateCommand _load;
-
         private bool CanLoad()
         {
             return true;
         }
-
         private void Load()
         {
             FullName = model.FullName;
@@ -303,10 +380,15 @@ namespace HW9_Resume_MVVM_INotify.ViewModel
             Salary = model.Salary;
 
             // Очищаем коллекции, чтобы избежать дублирования данных при повторной загрузке
+            if (Jobs == null) Jobs = new ObservableCollection<VM_Job> ();
             Jobs.Clear();
+            if (Contacts == null) Contacts = new ObservableCollection<VM_Contact> ();
             Contacts.Clear();
+            if (SocialSkills == null) SocialSkills = new ObservableCollection<VM_Skill> ();
             SocialSkills.Clear();
+            if (WorkSkills == null) WorkSkills = new ObservableCollection<VM_Skill> () ;
             WorkSkills.Clear();
+            if (Languages == null) Languages = new ObservableCollection<VM_Language> ();
             Languages.Clear();
 
             // Загрузка данных из модели в коллекции ViewModel
@@ -346,75 +428,5 @@ namespace HW9_Resume_MVVM_INotify.ViewModel
             }
         }
 
-
-
-        public string ImageSource
-        {
-            get { return model.SourceImage; }
-            set
-            {
-                model.SourceImage = value;
-                OnPropertyChanged(nameof (ImageSource));
-            }
-        }
-        public string FullName
-        {
-            get { return model.FullName; }
-            set
-            {
-                model.FullName = value;
-                OnPropertyChanged(nameof(FullName));
-            }
-        }
-        public string Age
-        {
-            get { return model.Age; }
-            set
-            {
-                model.Age = value;
-                OnPropertyChanged(nameof(Age));
-            }
-        }
-        public string Post
-        {
-            get { return model.Post; }
-            set
-            {
-                model.Post = value;
-                OnPropertyChanged(nameof(Post));
-            }
-        }
-        public string Salary
-        {
-            get { return model.Salary; }
-            set
-            {
-                model.Salary = value;
-                OnPropertyChanged(nameof(Salary));
-            }
-        }
-
-        public VM_Resume() 
-        {
-            model = new M_Resume();
-            Contacts = new ObservableCollection<VM_Contact>();
-            Index_selectedContact = -1;
-
-            Languages = new ObservableCollection<VM_Language>();
-            Index_selectedLanguage = -1;
-
-            WorkSkills = new ObservableCollection<VM_Skill>();
-            Index_selectedWorkSkill = -1;
-
-            SocialSkills = new ObservableCollection<VM_Skill>();
-            Index_selectedSocialSkill = -1;
-
-            Jobs = new ObservableCollection<VM_Job>();
-            Index_selectedJob = -1;
-        }
-        public override string ToString()
-        {
-            return $"{FullName}, {Age}, {Post}";
-        }
     }
 }

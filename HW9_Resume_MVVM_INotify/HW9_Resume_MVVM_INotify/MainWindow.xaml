@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:HW9_Resume_MVVM_INotify"
         xmlns:VM="clr-namespace:HW9_Resume_MVVM_INotify.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" 
+        Height="450" MinHeight="300"
+        Width="800" MinWidth="550">
 
 
     
@@ -123,7 +125,7 @@
         <Grid
             Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" MinWidth="150"/>
+                <ColumnDefinition Width="*" MinWidth="250"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
@@ -446,16 +448,15 @@
 
             <!--Work Info-->
             <ScrollViewer
-                VerticalScrollBarVisibility="Auto"                
+                VerticalScrollBarVisibility="Auto"  
                 Grid.Column="1">
                 <StackPanel>
                     <!--EXPIRIENCE-->
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
-                        
                         <!--HEADER-->
                         <Border
                             Grid.Row="0"
@@ -488,11 +489,11 @@
                                 Command="{Binding Current.RemoveJobCommand}"/>
                         </Grid>
                         </Border>
+                        <!--COLLECTION-->
                         <ListBox
                             Grid.Row="1"
                             ItemsSource="{Binding Current.Jobs}"
-                            SelectedIndex="{Binding Current.Index_selectedJob}"
-                            HorizontalContentAlignment="Stretch">
+                            SelectedIndex="{Binding Current.Index_selectedJob}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
@@ -512,6 +513,7 @@
                                                 Style="{StaticResource StaticText}"/>
                                             <TextBox
                                                 Text="{Binding EndDate}"
+                                                TextWrapping="Wrap"
                                                 Style="{StaticResource BasicText}"/>
                                         </WrapPanel>
                                         <!--Info-->
@@ -554,10 +556,18 @@
         </Grid>
 
         <!--Controls-->
-        <StackPanel
+        <WrapPanel
             Grid.Row="2"
             Orientation="Horizontal"
             HorizontalAlignment="Center">
+            <Button
+                Content="Add new resume"
+                Style="{StaticResource st_ButtonAction}"
+                Command="{Binding AddResumeCommand}"/>
+            <Button
+                Content="Remove this resume"
+                Style="{StaticResource st_ButtonAction}"
+                Command="{Binding RemoveCommand}"/>
             <Button
                 Content="Ok"
                 Style="{StaticResource st_ButtonAction}"
@@ -566,6 +576,10 @@
                 Content="Cancel"
                 Style="{StaticResource st_ButtonAction}"
                 Command="{Binding Current.LoadCommand}"/>
-        </StackPanel>
+            <Button
+                Content="Save ALL"
+                Style="{StaticResource st_ButtonAction}"
+                Command="{Binding SavePeopleCommand}"/>
+        </WrapPanel>
     </Grid>
 </Window>
