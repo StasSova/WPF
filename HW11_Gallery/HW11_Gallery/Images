@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfM_Images xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <M_Images>
+    <Author>Stas Sova</Author>
+    <Name>City</Name>
+    <Date>23.11.2023 18:04</Date>
+    <PathToPhoto>maeva-vigier-1QU_uJBaX4c-unsplash.jpg</PathToPhoto>
+    <Ratings>
+      <Key>Stas</Key>
+      <Value>3.4666666666666663</Value>
+    </Ratings>
+    <Ratings>
+      <Key>Stas2</Key>
+      <Value>3.5666666666666678</Value>
+    </Ratings>
+    <Ratings>
+      <Key>Test1</Key>
+      <Value>4.666666666666667</Value>
+    </Ratings>
+  </M_Images>
+  <M_Images>
+    <Author>Stas Sova</Author>
+    <Name>Abstract</Name>
+    <Date>23.11.2023 18:09</Date>
+    <PathToPhoto>shubham-dhage-cIwzPYs-_Mk-unsplash.jpg</PathToPhoto>
+    <Ratings>
+      <Key>Stas</Key>
+      <Value>4.600000000000001</Value>
+    </Ratings>
+    <Ratings>
+      <Key>Test1</Key>
+      <Value>3.5666666666666678</Value>
+    </Ratings>
+  </M_Images>
+  <M_Images>
+    <Author>Stas Sova</Author>
+    <Name>Office</Name>
+    <Date>23.11.2023 18:10</Date>
+    <PathToPhoto>jason-leung-GwmLreV8NkA-unsplash.jpg</PathToPhoto>
+    <Ratings>
+      <Key>Stas</Key>
+      <Value>3.5</Value>
+    </Ratings>
+    <Ratings>
+      <Key>Test1</Key>
+      <Value>1.6666666666666665</Value>
+    </Ratings>
+  </M_Images>
+  <M_Images>
+    <Author>Test1 Test1</Author>
+    <Name>Animal </Name>
+    <Date>23.11.2023 18:12</Date>
+    <PathToPhoto>erik-karits-kJT_lfheLgA-unsplash.jpg</PathToPhoto>
+    <Ratings>
+      <Key>Test1</Key>
+      <Value>5</Value>
+    </Ratings>
+  </M_Images>
+</ArrayOfM_Images>

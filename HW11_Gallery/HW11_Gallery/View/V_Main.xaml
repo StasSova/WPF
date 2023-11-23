@@ -1,0 +1,367 @@
+﻿<Window x:Class="HW11_Gallery.View.V_Main"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodel="clr-namespace:HW11_Gallery.ViewModel"
+        xmlns:local="clr-namespace:HW11_Gallery.View"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignDarkBackground}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        mc:Ignorable="d"
+        Title="V_Main" 
+        Height="550" MinHeight="550"
+        Width="800" MinWidth="800">
+
+    <Window.Resources>
+        <ResourceDictionary>
+
+            <LinearGradientBrush x:Key="WindowBackgroundBrush" StartPoint="1,0" EndPoint="0,1">
+                <GradientStop Color="#434343" Offset="0"/>
+                <GradientStop Color="#1d1d1d" Offset="1"/>
+            </LinearGradientBrush>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    <Window.DataContext>
+        <viewmodel:VM_Main/>
+    </Window.DataContext>
+    
+    <Grid
+        Background="{DynamicResource MaterialDesignDarkBackground}">
+        <Grid.RowDefinitions>
+            <!-- MAIN CONTENT -->
+            <RowDefinition Height="*"/>
+            <!-- CONTROLS -->
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- MAIN CONTENT -->
+        <Grid
+            Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <!-- LEFT PROGRESS BAR -->
+                <ColumnDefinition Width="auto"/>
+                <!-- PHOTO -->
+                <ColumnDefinition Width="*"/>
+                <!-- RIGHT PROGRESS BAR -->
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <!-- LEFT PROGRESS BAR -->
+            <Slider
+                Grid.Column="0"
+                Margin="40"
+                materialDesign:SliderAssist.HideActiveTrack="False"
+                Maximum="{Binding MaximumImages}"
+                Minimum="0"
+                Orientation="Vertical"
+                Foreground="{DynamicResource MaterialDesignDarkForeground}"
+                Style="{StaticResource MaterialDesignDiscreteSlider}"
+                TickFrequency="{Binding DiscreteVertical.TickFrequency}"
+                TickPlacement="Both"
+                Value="{Binding CurrentPosition, Mode=TwoWay}" />
+
+            <!-- FLIPPER -->
+            <Grid
+                x:Name="outerGrid"
+                Grid.Column="1"
+                Margin="0 25">
+                
+                <materialDesign:Flipper
+                    Height="{Binding ActualHeight, ElementName=outerGrid}"
+                    Width="{Binding ActualWidth, ElementName=outerGrid}"
+                    Style="{DynamicResource MaterialDesignCardFlipper}">
+                    
+                    <!-- FRONT CONTENT -->
+                    <materialDesign:Flipper.FrontContent>
+                        <Grid
+                            Height="auto"
+                            Width="auto">
+                             <!--PHOTO--> 
+                            <Image
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Source="{Binding CurrentImage.PathToPhoto}"
+                                Stretch="Uniform"/>
+
+                             <!--BUTTON FLIPPER--> 
+                            <Button
+                                Width="auto"
+                                Height="auto"
+                                Content=""
+                                Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                Style="{StaticResource MaterialDesignFlatDarkButton}"
+                                ToolTip="More info" />
+                            
+                            <!-- BUTTON -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <!-- BACK -->
+                                <Button
+                                    Grid.Column="0"
+                                    Margin="15 0 0 0"
+                                    Background="{DynamicResource MaterialDesignBodyLight}"
+                                    Foreground="{DynamicResource MaterialDesignDarkForeground}"
+                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                    Style="{StaticResource MaterialDesignIconButton}"
+                                    ToolTip="Back image"
+                                    Command="{Binding PrevImagesCommand}">
+                                    <materialDesign:PackIcon
+                                        Kind="ChevronLeft" />
+                                </Button>
+                                
+                                <!-- NEXT -->
+                                <Button
+                                    Grid.Column="2"
+                                    Margin="0 0 15 0"
+                                    Background="{DynamicResource MaterialDesignBodyLight}"
+                                    Foreground="{DynamicResource MaterialDesignDarkForeground}"
+                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                    Style="{StaticResource MaterialDesignIconButton}"
+                                    Command="{Binding NextImagesCommand}"
+                                    ToolTip="Next image">
+                                    <materialDesign:PackIcon
+                                        Kind="ChevronRight" />
+                                </Button>
+                                
+                            </Grid>
+                        </Grid>
+                    </materialDesign:Flipper.FrontContent>
+
+                    <!-- BACK CONTENT -->
+                    <materialDesign:Flipper.BackContent>
+                        <Grid
+                            VerticalAlignment="Center"
+                            Width="auto"
+                            Height="auto">         
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            
+                            <!-- HEADER -->
+                            <materialDesign:ColorZone
+                                    Grid.Row="0"
+                                    Padding="6"
+                                    Mode="PrimaryDark"> <!--background-->
+                                <StackPanel
+                                    Orientation="Horizontal">
+                                    <!-- BUTTON TO BACK -->
+                                    <Button
+                                        HorizontalAlignment="Left"
+                                        Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                        Style="{StaticResource MaterialDesignToolForegroundButton}">
+                                        <materialDesign:PackIcon
+                                            HorizontalAlignment="Right"
+                                            Kind="ArrowLeft" />
+                                    </Button>
+                                    <!-- TEXT -->
+                                    <TextBlock
+                                        Margin="8,0,0,0"
+                                        VerticalAlignment="Center"
+                                        Text="BACK TO IMAGE" />
+                                </StackPanel>
+                            </materialDesign:ColorZone>
+                            <!-- INFORAMATION -->
+                            <materialDesign:ColorZone
+                                Grid.Row="1"
+                                Padding="16"
+                                materialDesign:ElevationAssist.Elevation="Dp4"
+                                ClipToBounds="False"
+                                CornerRadius="0 0 25 25"
+                                Mode="PrimaryMid">
+                                <StackPanel
+                                    Orientation="Vertical"
+                                    Margin="25 25">
+                                    
+                                    <!-- AUTHOR -->
+                                    <StackPanel 
+                                        Orientation="Horizontal">
+                                        <TextBlock
+                                            Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                            Margin="0 0 15 0"
+                                            Text="AUTHOR: " />
+                                        <TextBlock
+                                            Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                            Text="{Binding CurrentImage.Author}" />
+                                    </StackPanel>
+                                    <!-- NAME PHOTO -->
+                                    <StackPanel
+                                        Margin="0 25 0 0"
+                                        Orientation="Horizontal">
+                                        <TextBlock
+                                            Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                            Margin="0 0 15 0"
+                                            Text="NAME: " />
+                                        <TextBlock
+                                            Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                            Text="{Binding CurrentImage.Name}" />
+                                    </StackPanel>
+                                    <!-- DATE -->
+                                    <StackPanel
+                                        Margin="0 25 0 0"
+                                        Orientation="Horizontal">
+                                        <TextBlock
+                                            Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                            Margin="0 0 15 0"
+                                            Text="DATE: " />
+                                        <TextBlock
+                                            Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                            Text="{Binding CurrentImage.Date}" />
+                                    </StackPanel>
+
+                                </StackPanel>
+                            </materialDesign:ColorZone>
+                        </Grid>
+                    </materialDesign:Flipper.BackContent>
+                </materialDesign:Flipper>
+            
+            </Grid>
+            
+            <!-- RIGHT PROGRESS BAR -->
+            <Slider
+                Grid.Column="2"
+                materialDesign:SliderAssist.HideActiveTrack="False"
+                Margin="40"
+                Maximum="{Binding MaximumImages}"
+                Minimum="0"
+                Orientation="Vertical"
+                Foreground="{DynamicResource MaterialDesignDarkForeground}"
+                Style="{StaticResource MaterialDesignDiscreteSlider}"
+                TickFrequency="{Binding DiscreteVertical.TickFrequency}"
+                TickPlacement="Both"
+                Value="{Binding CurrentPosition, Mode=TwoWay}" />
+        </Grid>
+        
+        <!-- CONTROLS -->
+        <Grid
+            Grid.Row="1"
+            Height="auto">
+            <Grid.ColumnDefinitions>
+                <!-- BUTTON ADD -->
+                <ColumnDefinition Width="*"/>
+                <!-- RATING -->
+                <ColumnDefinition Width="*"/>
+                <!-- Button END START -->
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- BUTTON ADD -->
+            <StackPanel 
+                Orientation="Horizontal"
+                Grid.Column="0">
+                <!-- ADD TO COLLECTION -->
+                <Grid
+                    Grid.Column="2"
+                    Margin="15 25 5 25"
+                    Width="auto"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Stretch">
+                    <Button
+                        Margin="2,0"
+                        materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                        materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                        materialDesign:ButtonProgressAssist.IndicatorForeground="Black"
+                        Foreground="{DynamicResource MaterialDesignDarkForeground}"
+                        Content="ADD IMAGE"
+                        Command="{Binding AddImagesCommand}"
+                        Style="{StaticResource MaterialDesignFlatButton}" />
+                </Grid>
+                <!-- ADD TO COLLECTION -->
+                <Grid
+                    Grid.Column="2"
+                    Margin="5 25 15 25"
+                    Width="auto"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Stretch">
+                    <Button
+                        Margin="2,0"
+                        materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                        materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                        materialDesign:ButtonProgressAssist.IndicatorForeground="Black"
+                        Foreground="{DynamicResource MaterialDesignDarkForeground}"
+                        Content="SAVE IMAGES"
+                        Command="{Binding SaveImagesCommand}"
+                        Style="{StaticResource MaterialDesignFlatButton}" />
+                </Grid>
+
+            </StackPanel>
+            
+            <!-- RATING -->
+            <Grid
+                Grid.Column="1"
+                HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <materialDesign:RatingBar
+                    HorizontalAlignment="Center"
+                    Grid.Row="0"
+                    IsPreviewValueEnabled="True"
+                    Min="0"
+                    ValueIncrements="0.25"
+                    Value="{Binding CurrentImage.MyMark, Mode=TwoWay}" />
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    Grid.Row="1"
+                    Foreground="{DynamicResource MaterialDesignDarkForeground}"
+                    Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                    ToolTip="Average rating"
+                    Text="{Binding CurrentImage.AvaregeRating}" />
+            </Grid>
+            
+            <!-- Button END START -->
+            <StackPanel 
+                Orientation="Horizontal"
+                Grid.Column="2">
+                <!-- BUTTON START -->
+                <Grid
+                Grid.Column="0"
+                Margin="15 25"
+                Width="100"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Stretch">
+                    <Button
+                    Margin="2,0"
+                    materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                    materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                    materialDesign:ButtonProgressAssist.IndicatorForeground="Black"
+                    Foreground="{DynamicResource MaterialDesignDarkForeground}"
+                    Content="START"
+                    Command="{Binding StartImagesCommand}"
+                    Style="{StaticResource MaterialDesignFlatButton}" />
+                </Grid>
+                
+                <!-- BUTTON END -->
+                <Grid
+                Grid.Column="2"
+                Margin="15 25"
+                Width="100"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Stretch">
+                    <Button
+                    Margin="2,0"
+                    materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                    materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                    materialDesign:ButtonProgressAssist.IndicatorForeground="Black"
+                    Foreground="{DynamicResource MaterialDesignDarkForeground}"
+                    Content="END"
+                    Command="{Binding EndImagesCommand}"
+                    Style="{StaticResource MaterialDesignFlatButton}" />
+                </Grid>
+            </StackPanel>
+
+        </Grid>
+    </Grid>
+</Window>

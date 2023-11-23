@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "wUZtZ7Pke0Mk4S/RzitF5Pktu7rxLjwylHkhp9M54OkHMzq8nop8yaK8iFTFDeQ56q7rCIwf2YrvA5bThd+NIg==",
+  "success": true,
+  "projectFilePath": "D:\\Visual_Studio\\3 Course\\WPF\\HW11_Gallery\\HW11_Gallery\\HW11_Gallery.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Stas\\.nuget\\packages\\materialdesigncolors\\2.1.4\\materialdesigncolors.2.1.4.nupkg.sha512",
+    "C:\\Users\\Stas\\.nuget\\packages\\materialdesignthemes\\4.9.0\\materialdesignthemes.4.9.0.nupkg.sha512",
+    "C:\\Users\\Stas\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.39\\microsoft.xaml.behaviors.wpf.1.1.39.nupkg.sha512"
+  ],
+  "logs": []
+}
